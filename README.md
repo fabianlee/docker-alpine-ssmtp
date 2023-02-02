@@ -29,12 +29,15 @@ send_email:
   image: ghcr.io/fabianlee/docker-alpine-ssmtp:1.0.2
   script:
     - |
-      echo "root=this@domain.com" > /etc/ssmtp/ssmtp.conf
-      echo "mailhub=" >> /etc/ssmtp/ssmtp.conf
+      echo "root=$FROM" > /etc/ssmtp/ssmtp.conf
+      echo "mailhub=$MAIL" >> /etc/ssmtp/ssmtp.conf
+      echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf
+      echo "UseTLS=false" >> /etc/ssmtp/ssmtp.conf
+      echo "Debug=YES" >> /etc/ssmtp/ssmtp.conf
     - |
-      echo -e "From: adslj\nSubject: sdlj\n\nThis is test body" | ssmtp to@domain.com
+      echo -e "From: flee@domain.com\nTo: admin@domain.com\nSubject: hello world\n\nthis is the body" | ssmtp admin@domain.com
     #- |
-    #  echo -e "From: adslj\nSubject: sdlj\n\nThis is test body" | (cat - && uuencode /path/docker-logo.png attachment.png) |ssmtp to@domain.com
+    #  echo -e "From: flee@domain.com\nTo: admin@domain.com\nSubject: hello world\n\nthis is the body" | (cat - && uuencode artifact.pdf attachment.pdf) | ssmtp admin@domain.com
 ```
 
 ## Github Container Registry
