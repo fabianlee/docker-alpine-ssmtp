@@ -15,8 +15,8 @@ MY_GITREF := $(shell git rev-parse --short HEAD)
 # values for sending test email
 MAIL := 192.168.2.216
 FROM := flee@domain.com
-SUBJECT := my subject
 TO := admin@domain.com
+SUBJECT := my subject
 ATTACHMENT := docker-logo.png
 
 ## builds docker image
